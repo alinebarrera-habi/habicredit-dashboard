@@ -1,0 +1,12 @@
+# Contrasena de publicacion (por maquina) - NUNCA se sube
+config.local.ps1
+config.local.sh
+
+# El tablero SIN cifrar no va al repo (el repo es publico)
+_build/
+*.json
+
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
