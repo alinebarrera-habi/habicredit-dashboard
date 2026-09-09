@@ -45,7 +45,7 @@ python $chkFile $out $HABICREDIT_PASSWORD $Source
 if ($LASTEXITCODE -ne 0) { throw 'la pagina cifrada NO abre con la contrasena configurada' }
 Remove-Item $chkFile -Force -ErrorAction SilentlyContinue
 
-$meta = [regex]::Match((Get-Content $Source -Raw -Encoding UTF8), '"generado_en":"([^"]+)"').Groups[1].Value
+$meta = [regex]::Match((Get-Content $Source -Raw -Encoding UTF8), '"generado_en":\s*"([^"]+)"').Groups[1].Value
 if ($Mensaje -eq '') { $Mensaje = "Publicar dashboard HabiCredit (cifrado) - datos $meta - $(Get-Date -Format 'yyyy-MM-dd HH:mm')" }
 git -C $repo add index.html
 $st = git -C $repo status --porcelain index.html

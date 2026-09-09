@@ -19,7 +19,7 @@ $html = [IO.File]::ReadAllText((Join-Path $SrcDir 'dashboard.html'), [Text.Encod
 $json = [IO.File]::ReadAllText((Join-Path $SrcDir 'datos.json'), [Text.Encoding]::UTF8).Trim()
 # validar que el JSON parsea (si no, el tablero mostraria "error de carga")
 $null = $json | ConvertFrom-Json
-$meta = [regex]::Match($json, '"generado_en":"([^"]+)"').Groups[1].Value
+$meta = [regex]::Match($json, '"generado_en":\s*"([^"]+)"').Groups[1].Value   # datos.json viene indentado
 if ($html -match 'window\.__DATOS__\s*=') { throw 'dashboard.html ya trae window.__DATOS__; revisar antes de inyectar' }
 # </script> dentro del JSON romperia el <script>; no deberia haber, pero se escapa por si acaso
 $json = $json.Replace('</', '<\/')
